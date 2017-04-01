@@ -52,7 +52,8 @@ branches:
 install:
  - true
 script:
-  - ./gradlew ciBuild release -s
+  - ./gradlew build idea -s
 after_success:
+  - ./gradlew travisRelease -s
   - ./gradlew --stacktrace coverageReport && cp build/reports/jacoco/mockitoCoverage/mockitoCoverage.xml jacoco.xml || echo "Code coverage failed"
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
